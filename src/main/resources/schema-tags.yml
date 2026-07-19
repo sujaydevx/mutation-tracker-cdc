@@ -1,0 +1,20 @@
+tables:
+  users:
+    columns:
+      email: pii
+      name: pii
+      balance: financial
+      address: pii
+      phone: pii
+  orders:
+    columns:
+      amount: financial
+      status: operational
+      user_id: pii
+      shipping_address: pii
+  payments:
+    columns:
+      amount: financial
+      card_number: pii
+      status: operational
+      transaction_id: operational
