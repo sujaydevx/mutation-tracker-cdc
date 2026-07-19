@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: mutation-tracker
+
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5433/testdb?stringtype=unspecified
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: cdc-consumer-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+groq:
+  api:
+    key: placeholder
+    url: https://api.groq.com/openai/v1/chat/completions
+    model: llama-3.1-8b-instant
+
+kafka:
+  topics:
+    cdc-users: cdc.public.users
+    privacy-alerts: privacy-alerts
+    financial-audit: financial-audit
+    dead-letter: audit.dead-letter
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,metrics
+
+schema-tags:
+  tables:
+    users:
+      columns:
+        email: pii
+        name: pii
+        balance: financial
+        address: pii
+        phone: pii
+    orders:
+      columns:
+        amount: financial
+        status: operational
+        user_id: pii
