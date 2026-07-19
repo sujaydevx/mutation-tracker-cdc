@@ -1,0 +1,63 @@
+Merge both together. Replace your entire `.gitignore` with this:
+
+```gitignore
+# Maven
+HELP.md
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+# STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# VS Code
+.vscode/
+
+# API Keys - NEVER push these
+application-local.yml
+application-secret.yml
+.env
+
+# Logs
+*.log
+logs/
+
+# Docker volumes
+postgres_data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Spring Boot
+spring-shell.log
+```
+
+Push this first. Then tell me when project compiles and we move to `DiffEngine`.
