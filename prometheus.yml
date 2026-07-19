@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  # Scrape Spring Boot app metrics
+  - job_name: 'mutation-tracker'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+
+  # Scrape Kafka metrics via JMX exporter (optional)
+  - job_name: 'kafka'
+    static_configs:
+      - targets: ['kafka:9092']
